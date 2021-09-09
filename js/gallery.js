@@ -67,5 +67,3 @@ function onCloseModalClickOnOverlay(event) {
     onCloseModal();
   }
 }
-
-function onScrollingGalleryImages(event) {}
