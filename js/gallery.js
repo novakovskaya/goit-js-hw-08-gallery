@@ -34,7 +34,7 @@ refs.galleryList.insertAdjacentHTML('beforeend', galleryItemsMarkup);
 
 refs.galleryList.addEventListener('click', onOpenModal);
 refs.closeModalBtn.addEventListener('click', onCloseModal);
-refs.closeModalOverlay.addEventListener('click', onCloseModalClickOnOverlay);
+refs.closeModalOverlay.addEventListener('click', onCloseModal);
 
 function onOpenModal(event) {
   if (event.target.nodeName === 'IMG') {
@@ -43,9 +43,8 @@ function onOpenModal(event) {
     refs.lightbox.classList.add('is-open');
     refs.lightboxImage.src = event.target.dataset.source;
     refs.lightboxImage.alt = event.target.alt;
+    window.addEventListener('keydown', onEscKeyDown);
   }
-
-  window.addEventListener('keydown', onEscKeyDown);
 }
 
 function onCloseModal(event) {
@@ -58,12 +57,6 @@ function onCloseModal(event) {
 
 function onEscKeyDown(event) {
   if (event.code === 'Escape') {
-    onCloseModal();
-  }
-}
-
-function onCloseModalClickOnOverlay(event) {
-  if (event.currentTarget === event.target) {
     onCloseModal();
   }
 }
