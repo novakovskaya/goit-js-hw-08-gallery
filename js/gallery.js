@@ -44,6 +44,7 @@ function onOpenModal(event) {
     refs.lightboxImage.src = event.target.dataset.source;
     refs.lightboxImage.alt = event.target.alt;
     window.addEventListener('keydown', onEscKeyDown);
+    window.addEventListener('keydown', onScrollingGalleryImages);
   }
 }
 
@@ -58,5 +59,18 @@ function onCloseModal(event) {
 function onEscKeyDown(event) {
   if (event.code === 'Escape') {
     onCloseModal();
+  }
+}
+
+function onScrollingGalleryImages(event) {
+  if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+    const item = galleryItems.map(({ original }) => original);
+    let indexOfImage = item.indexOf(refs.lightboxImage.src);
+
+    if (indexOfImage === 0) {
+      indexOfImage = item.length;
+    }
+
+    refs.lightboxImage.src = item[indexOfImage - 1];
   }
 }
